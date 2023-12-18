@@ -16,6 +16,13 @@ import UpdateCategory from "./pages/update-category/UpdateCategory";
 import Shops from "./pages/shops/Shops";
 import NewShop from "./pages/new-shop/NewShop";
 import UpdateShop from "./pages/update-shop/UpdateShop";
+import Map from "./pages/map/Map";
+import Promotions from "./pages/promotions/Promotions";
+import NewPromotion from "./pages/new-promotion/NewPromotion";
+import UpdatePromotion from "./pages/update-promotion/UpdateProduct";
+import Banners from "./pages/banners/Banners";
+import NewBanner from "./pages/new-banner/NewBanner";
+import UpdateBanner from "./pages/update-banner/UpdateBanner";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -53,6 +60,19 @@ function App() {
             <Route index element={<Products />} />
             <Route path=":id" element={<UpdateProduct />} />
             <Route path="new" element={<NewProduct />} />
+          </Route>
+          <Route path="promotions">
+            <Route index element={<Promotions />} />
+            <Route path=":id" element={<UpdatePromotion />} />
+            <Route path="new" element={<NewPromotion />} />
+          </Route>
+          <Route path="banners">
+            <Route index element={<Banners />} />
+            <Route path=":id" element={<UpdateBanner />} />
+            <Route path="new" element={<NewBanner />} />
+          </Route>
+          <Route path="maps">
+            <Route index element={<Map />} />
           </Route>
           {/* <Route path="products">
             <Route index element={<Users />} />

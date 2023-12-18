@@ -2,7 +2,7 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 
-const Datatable = ({ listData, columns, title, urlAdd }) => {
+const Datatable = ({ listData, columns, title, urlAdd, ...props }) => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -20,6 +20,7 @@ const Datatable = ({ listData, columns, title, urlAdd }) => {
           columns={columns}
           pageSize={50}
           rowsPerPageOptions={[50]}
+          {...props}
         />
       )}
     </div>

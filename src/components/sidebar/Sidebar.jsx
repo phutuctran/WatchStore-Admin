@@ -4,16 +4,12 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import StoreIcon from "@mui/icons-material/Store";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import LocalActivityOutlinedIcon from "@mui/icons-material/LocalActivityOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -26,7 +22,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Order Food</span>
+          <span className="logo">App watch</span>
         </Link>
       </div>
       <hr />
@@ -62,6 +58,18 @@ const Sidebar = () => {
             <li>
               <LocalShippingIcon className="icon" />
               <span>Products</span>
+            </li>
+          </Link>
+          <Link to="/promotions" style={{ textDecoration: "none" }}>
+            <li>
+              <AttachMoneyIcon className="icon" />
+              <span>Promotions</span>
+            </li>
+          </Link>
+          <Link to="/banners" style={{ textDecoration: "none" }}>
+            <li>
+              <LocalActivityOutlinedIcon className="icon" />
+              <span>Banner</span>
             </li>
           </Link>
           <li onClick={handleLogout}>

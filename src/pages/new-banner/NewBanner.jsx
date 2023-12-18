@@ -1,46 +1,47 @@
-import "./new-shop.scss";
+import "./new-banner.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { createShop } from "../../lib/api";
+import { createCategory } from "../../lib/api";
+import { createBanner } from "../../lib/api/banner";
 
-const NewShop = () => {
+const NewBanner = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-  const handleCreateShop = async (e) => {
+  const handleCreateUser = async (e) => {
     try {
       e.preventDefault();
 
-      const data = await createShop({ name, address, phone });
+      const data = await createBanner({ name, avatarUrl });
       if (data?.data?.status == 200) {
-        navigate("/shops");
-        return toast.success("Tạo mới shop thành công");
+        navigate("/banners");
+        return toast.success("Tạo mới banner thành công");
       } else {
         return toast.error(
-          "Tạo shop thất bại, vui lòng kiểm tra sự hợp lệ các trường"
+          "Tạo banner thất bại, vui lòng kiểm tra sự hợp lệ các trường"
         );
       }
     } catch (error) {
       return toast.error(
-        "Tạo shop thất bại, vui lòng kiểm tra sự hợp lệ các trường"
+        "Tạo banner thất bại, vui lòng kiểm tra sự hợp lệ các trường"
       );
     }
   };
+
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1>{"Thêm mới Shop"}</h1>
+          <h1>{"Thêm mới banner"}</h1>
         </div>
         <div className="bottom">
-          <form onSubmit={handleCreateShop}>
+          <form onSubmit={handleCreateUser}>
             <div className="formInput">
               <label>Name</label>
               <input
@@ -52,25 +53,16 @@ const NewShop = () => {
               />
             </div>
             <div className="formInput">
-              <label>Address</label>
+              <label>Avatar Url</label>
               <input
                 type="text"
-                placeholder={"Nhập address"}
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-            <div className="formInput">
-              <label>Phone</label>
-              <input
-                type="text"
-                placeholder={"Nhập phone"}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                placeholder={"Nhập avatar url"}
+                value={avatarUrl}
+                onChange={(e) => setAvatarUrl(e.target.value)}
               />
             </div>
             <div style={{ width: "100%", textAlign: "center" }}>
-              <button type={"submit"}>Tạo mới Shop</button>
+              <button type={"submit"}>Tạo mới Banner</button>
             </div>
           </form>
         </div>
@@ -79,4 +71,4 @@ const NewShop = () => {
   );
 };
 
-export default NewShop;
+export default NewBanner;
