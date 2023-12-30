@@ -8,6 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const DialogDelete = ({ handleClose, handleOk, open }) => {
   return (
+    // update dialoge
     <Dialog
       open={open}
       onClose={handleClose}
