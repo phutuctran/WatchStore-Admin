@@ -23,6 +23,8 @@ import UpdatePromotion from "./pages/update-promotion/UpdateProduct";
 import Banners from "./pages/banners/Banners";
 import NewBanner from "./pages/new-banner/NewBanner";
 import UpdateBanner from "./pages/update-banner/UpdateBanner";
+import Orders from "./pages/orders/Orders"; 
+import OrderDetail from "./pages/order-detail/OrderDetail"; 
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -43,8 +45,12 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="users">
             <Route index element={<Users />} />
-            <Route path=":info" element={<UpdateUser />} />
+            <Route path=":info" element={<UpdateUser/>} />
             <Route path="new" element={<NewUser />} />
+          </Route>
+          <Route path="orders">
+            <Route index element={<Orders />} />
+            <Route path=":id" element={<OrderDetail/>} />
           </Route>
           <Route path="shops">
             <Route index element={<Shops />} />

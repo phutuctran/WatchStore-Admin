@@ -13,6 +13,9 @@ export const deleteProduct = async (idCategory, idProduct) => {
     "categories/delete/product?idC=" + idCategory + "&idP=" + idProduct
   );
 };
+export const removeProduct = async (id) => {
+  return request.delete("products/delete?id=" + id);
+};
 
 export const getDetailProduct = async id => {
   return request.get("products/" + id);

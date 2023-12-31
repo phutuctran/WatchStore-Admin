@@ -22,7 +22,7 @@ const MenuProps = {
 
 const NewProduct = () => {
   const [category, setCategory] = useState({});
-  const handleChange = event => {
+  const handleChange = (event) => {
     const {
       target: { value },
     } = event;
@@ -34,10 +34,12 @@ const NewProduct = () => {
   const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [quantity, setQuantity] = useState(null);
+  const [origin, setOrigin] = useState("");
+  const [material, setMaterial] = useState("");
 
   const [currentListCategory, setCurrentListCategory] = useState([]);
 
-  const handleCreateUser = async e => {
+  const handleCreateUser = async (e) => {
     try {
       e.preventDefault();
       const data = await createProduct({
@@ -47,6 +49,8 @@ const NewProduct = () => {
         imageUrl,
         quantity,
         category,
+        origin,
+        material,
       });
       if (data?.data?.status == 200) {
         navigate("/products");
@@ -91,7 +95,7 @@ const NewProduct = () => {
                 type="text"
                 placeholder={"Nhập name"}
                 value={name}
-                onChange={e => setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
@@ -100,7 +104,7 @@ const NewProduct = () => {
               <input
                 placeholder={"Nhập description"}
                 value={description}
-                onChange={e => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -109,7 +113,7 @@ const NewProduct = () => {
                 type="text"
                 placeholder={"Nhập price"}
                 value={price}
-                onChange={e => setPrice(e.target.value)}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -118,7 +122,7 @@ const NewProduct = () => {
                 type="text"
                 placeholder={"Nhập Img Url"}
                 value={imageUrl}
-                onChange={e => setImageUrl(e.target.value)}
+                onChange={(e) => setImageUrl(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -127,7 +131,25 @@ const NewProduct = () => {
                 type="text"
                 placeholder={"Nhập quantity"}
                 value={quantity}
-                onChange={e => setQuantity(e.target.value)}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+            </div>
+            <div className="formInput">
+              <label>Nguyên liệu</label>
+              <input
+                type="text"
+                placeholder={"Nhập nguyên liệu"}
+                value={material}
+                onChange={(e) => setMaterial(e.target.value)}
+              />
+            </div>
+            <div className="formInput">
+              <label>Nguồn gốc</label>
+              <input
+                type="text"
+                placeholder={"Nhập nguồn gốc"}
+                value={origin}
+                onChange={(e) => setOrigin(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -140,7 +162,7 @@ const NewProduct = () => {
                 size="small"
                 fullWidth
               >
-                {currentListCategory?.map(option => (
+                {currentListCategory?.map((option) => (
                   <MenuItem key={option.id} value={option}>
                     {option?.name}
                   </MenuItem>

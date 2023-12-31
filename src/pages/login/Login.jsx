@@ -45,7 +45,7 @@ const Login = () => {
       <Paper>
         <Box width={{ xs: "90vw", lg: "25vw" }} p={2}>
           <Typography variant="h6" fontWeight={"bold"} textAlign={"center"}>
-            Order Food
+            Watch Store
           </Typography>
           <Box mt={3} component={"form"} onSubmit={handleLogin}>
             <TextField

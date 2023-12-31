@@ -4,12 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  getDetailProduct,
-  listCategory,
-  updateCategory,
-  updateProduct,
-} from "../../lib/api";
+import { getDetailProduct, listCategory, updateCategory } from "../../lib/api";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -36,13 +31,26 @@ const UpdateProduct = () => {
   const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [origin, setOrigin] = useState("");
+  const [material, setMaterial] = useState("");
 
-  const handleUpdateProduct = async e => {
+  const handleUpdateProduct = async (e) => {
     try {
       e.preventDefault();
       await updateCategory({
         ...category,
-        products: [{ id, name, description, price, imageUrl, quantity }],
+        products: [
+          {
+            id,
+            name,
+            description,
+            price,
+            imageUrl,
+            quantity,
+            origin,
+            material,
+          },
+        ],
       });
       navigate("/products");
       return toast.success("Cập nhật product thành công");
@@ -53,7 +61,7 @@ const UpdateProduct = () => {
     }
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const {
       target: { value },
     } = event;
@@ -73,6 +81,9 @@ const UpdateProduct = () => {
         setQuantity(product?.data?.data?.quantity);
       product?.data?.data?.category &&
         setCategory(product?.data?.data?.category);
+      product?.data?.data?.origin && setOrigin(product?.data?.data?.origin);
+      product?.data?.data?.material &&
+        setMaterial(product?.data?.data?.material);
     };
     getCurrentProduct();
   }, [id]);
@@ -90,14 +101,14 @@ const UpdateProduct = () => {
   }, []);
 
   useEffect(() => {
-    const findCategory = currentListCategory?.map(category => {
+    const findCategory = currentListCategory?.map((category) => {
       const existCategory = category?.products?.filter(
-        product => product.id == id
+        (product) => product.id == id
       );
       if (existCategory?.length > 0) return category;
     });
     const filteredArray = findCategory.filter(
-      element => element !== undefined && element !== null
+      (element) => element !== undefined && element !== null
     );
     setCategory(filteredArray[0]);
   }, [currentListCategory, id]);
@@ -118,7 +129,7 @@ const UpdateProduct = () => {
                 type="text"
                 placeholder={"Nhập name"}
                 value={name}
-                onChange={e => setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
@@ -129,7 +140,7 @@ const UpdateProduct = () => {
                 type="text"
                 placeholder={"Nhập số description"}
                 value={description}
-                onChange={e => setDescription(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -138,7 +149,7 @@ const UpdateProduct = () => {
                 type="text"
                 placeholder={"Nhập price"}
                 value={price}
-                onChange={e => setPrice(e.target.value)}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -147,7 +158,7 @@ const UpdateProduct = () => {
                 type="text"
                 placeholder={"Nhập imageUrl"}
                 value={imageUrl}
-                onChange={e => setImageUrl(e.target.value)}
+                onChange={(e) => setImageUrl(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -156,7 +167,25 @@ const UpdateProduct = () => {
                 type="text"
                 placeholder={"Nhập quantity"}
                 value={quantity}
-                onChange={e => setQuantity(e.target.value)}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+            </div>
+            <div className="formInput">
+              <label>Nguyên liệu</label>
+              <input
+                type="text"
+                placeholder={"Nhập nguyên liệu"}
+                value={material}
+                onChange={(e) => setMaterial(e.target.value)}
+              />
+            </div>
+            <div className="formInput">
+              <label>Nguồn gốc</label>
+              <input
+                type="text"
+                placeholder={"Nhập nguồn gốc"}
+                value={origin}
+                onChange={(e) => setOrigin(e.target.value)}
               />
             </div>
             <div className="formInput">
@@ -169,7 +198,7 @@ const UpdateProduct = () => {
                 size="small"
                 fullWidth
               >
-                {currentListCategory?.map(option => (
+                {currentListCategory?.map((option) => (
                   <MenuItem key={option.id} value={option}>
                     {option?.name}
                   </MenuItem>

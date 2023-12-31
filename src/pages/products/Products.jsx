@@ -3,7 +3,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Datatable from "../../components/datatable/Datatable";
 import { useEffect, useState } from "react";
-import { deleteProduct, listCategory, listProduct } from "../../lib/api";
+import { deleteProduct, listCategory, listProduct, removeProduct } from "../../lib/api";
 import { Link } from "react-router-dom";
 import DialogDelete from "../../components/dialog/DialogDelete";
 import { toast } from "react-toastify";
@@ -11,14 +11,14 @@ import { toast } from "react-toastify";
 const Products = () => {
   const [currentListCategory, setCurrentListCategory] = useState([]);
   const findCategoryId = (listCategory, id) => {
-    const findCategory = currentListCategory?.map(category => {
+    const findCategory = currentListCategory?.map((category) => {
       const existCategory = category?.products?.filter(
-        product => product.id == id
+        (product) => product.id == id
       );
       if (existCategory?.length > 0) return category;
     });
     const filteredArray = findCategory.filter(
-      element => element !== undefined && element !== null
+      (element) => element !== undefined && element !== null
     );
     return filteredArray[0];
   };
@@ -26,7 +26,7 @@ const Products = () => {
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [currentProductList, setCurrentProductList] = useState(null);
   const [idDelete, setIdDelete] = useState(null);
-  const handleOpenDialogDelete = id => {
+  const handleOpenDialogDelete = (id) => {
     setIdDelete(id);
     setIsOpenDelete(true);
   };
@@ -39,7 +39,10 @@ const Products = () => {
       const category = findCategoryId(currentListCategory, idDelete);
       toast.success("Xoá thành công");
       await deleteProduct(category.id, idDelete);
-      setCurrentProductList(currentProductList?.filter(e => e.id !== idDelete));
+      //await removeProduct(idDelete);
+      setCurrentProductList(
+        currentProductList?.filter((e) => e.id !== idDelete)
+      );
       handleClose();
     } catch (error) {
       toast.error("Xóa thất bại");
@@ -50,7 +53,7 @@ const Products = () => {
       field: "name",
       headerName: "Name",
       width: 230,
-      renderCell: params => {
+      renderCell: (params) => {
         return (
           <div className="cellWithImg">
             <img
@@ -74,19 +77,28 @@ const Products = () => {
     {
       field: "price",
       headerName: "Price",
-      width: 230,
+      width: 150,
     },
-
     {
       field: "quantity",
       headerName: "Quantity",
-      width: 160,
+      width: 150,
+    },
+    {
+      field: "origin",
+      headerName: "Nguồn gốc",
+      width: 150,
+    },
+    {
+      field: "material",
+      headerName: "Nguyên liệu",
+      width: 150,
     },
     {
       field: "action",
       headerName: "Action",
-      width: 200,
-      renderCell: params => {
+      width: 180,
+      renderCell: (params) => {
         return (
           <div className="cellAction">
             <Link

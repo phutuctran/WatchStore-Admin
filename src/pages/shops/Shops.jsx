@@ -26,10 +26,22 @@ const Shops = () => {
       width: 230,
     },
     {
+      field: "Categoey",
+      headerName: "Action",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="cellAction">
+            {params.row.categories?.map((e) => e.name)?.join(",")}
+          </div>
+        );
+      },
+    },
+    {
       field: "action",
       headerName: "Action",
       width: 200,
-      renderCell: params => {
+      renderCell: (params) => {
         return (
           <div className="cellAction">
             <Link
